@@ -12,6 +12,7 @@ namespace ControlDeStock.Services
     {
         string url = "https://basededatosprueba-43f2.restdb.io/rest/productos?apikey=0eb02941b4157bb3f6f863477b58795b87db6";
 
+
         public async Task<List<Producto>?> GetAllAsync()
         {
             using (HttpClient client = new HttpClient())
@@ -24,6 +25,21 @@ namespace ControlDeStock.Services
                 else
                 {
                     throw new Exception("Error al obtener las peliculas");
+                }
+            }
+        }
+        public async Task<bool> DeleteAsync( string _id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = await client.DeleteAsync(url);
+                if (!respuesta.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else               
+                {
+                    throw new Exception("Error al eliminar el producto");
                 }
             }
         }

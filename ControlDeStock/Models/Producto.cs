@@ -8,7 +8,7 @@ namespace ControlDeStock.Models
 {
     public class Producto
     {
-        public string id { get; set; }
+        public string _id { get; set; }
         public string nombre { get; set; }
         public string categoria { get; set; }
         public int presio { get; set; }
