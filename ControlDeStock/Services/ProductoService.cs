@@ -28,14 +28,16 @@ namespace ControlDeStock.Services
                 }
             }
         }
-        public async Task<bool> DeleteAsync( string _id)
+        public async Task<bool> DeleteAsync(string _id)
         {
+            
             using (HttpClient client = new HttpClient())
             {
                 var respuesta = await client.DeleteAsync(url);
                 if (!respuesta.IsSuccessStatusCode)
                 {
                     return true;
+                    
                 }
                 else               
                 {
