@@ -14,34 +14,43 @@ namespace ControlDeStock.Views
 {
     public partial class ListProductosView : Form
     {
+        //--*-- Instanciamos los campos para su uso general --*--//
         HttpClient clientHttp = new();
         string url = "https://basededatosprueba-43f2.restdb.io/rest/productos?apikey=0eb02941b4157bb3f6f863477b58795b87db6";
         ProductoService productoService = new();
-        List<Producto> productos = new List<Producto>();
+        List<Producto> productos = new();
         public ListProductosView()
         {
             InitializeComponent();
             ObtenemosLosProductos();
         }
-        private async void ObtenemosLosProductos()
+
+        //--*-- Método para obtener los productos y mostrarlos en la grilla --*--//
+        private async Task ObtenemosLosProductos()
         {
             GridProductosList.DataSource = await productoService.GetAllAsync();
+             
         }
 
+        //--*-- Método para eliminar un producto seleccionado en la grilla --*--//
         private async void BtnEliminar_Click(object sender, EventArgs e)
         {
-            //Chequemaos si se ha seleccionado un producto
+            //--*-- Controlamos que haya productos en la grilla y que se haya seleccionado al menos una fila antes de intentar eliminar. --*--//
             if (GridProductosList.RowCount > 0 && GridProductosList.SelectedRows.Count > 0)
             {
+                //--*-- Obtenemos el producto seleccionado de la grilla.--*--//
                 Producto productoSeleccionado = (Producto)GridProductosList.SelectedRows[0].DataBoundItem;
+
+                //--*-- Mostramos un mensaje de confirmación antes de eliminar el producto.--*--//
                 var respuesta = MessageBox.Show($"¿Está seguro de que desea eliminar {productoSeleccionado.nombre}", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (respuesta == DialogResult.Yes)
-                { 
+                if (respuesta == DialogResult.Yes) 
+                {
+                    //--*-- Si el usuario confirma la eliminación, procedemos a eliminar el producto. --*--//
                     if (await productoService.DeleteAsync(productoSeleccionado._id))
                     { 
                         MessageBox.Show("Producto eliminado correctamente.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ObtenemosLosProductos(); // Actualizamos la lista de productos después de eliminar
+                        await ObtenemosLosProductos(); // Llamamos al método para obtener los productos y mostrar la grilla actualizada.
                     }
                     else
                     {
