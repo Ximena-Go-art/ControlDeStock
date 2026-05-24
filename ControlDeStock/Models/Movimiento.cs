@@ -8,7 +8,7 @@ namespace ControlDeStock.Models
 {
     public class Movimiento
     {
-        public string _id { get; set; }
+        public int id { get; set; }
         public int id_producto { get; set; }
         public string tipo_movimiento { get; set; }
         public int cantidad { get; set; }
