@@ -63,20 +63,20 @@
             GridProductosList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             GridProductosList.BackgroundColor = Color.Lavender;
             GridProductosList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            GridProductosList.Location = new Point(4, 2);
+            GridProductosList.Location = new Point(0, 2);
             GridProductosList.Margin = new Padding(2);
             GridProductosList.MultiSelect = false;
             GridProductosList.Name = "GridProductosList";
             GridProductosList.ReadOnly = true;
             GridProductosList.RowHeadersWidth = 62;
             GridProductosList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridProductosList.Size = new Size(431, 214);
+            GridProductosList.Size = new Size(458, 252);
             GridProductosList.TabIndex = 0;
             // 
             // BtnAgregar
             // 
             BtnAgregar.Anchor = AnchorStyles.Right;
-            BtnAgregar.Location = new Point(451, 27);
+            BtnAgregar.Location = new Point(478, 53);
             BtnAgregar.Margin = new Padding(2);
             BtnAgregar.Name = "BtnAgregar";
             BtnAgregar.Size = new Size(78, 25);
@@ -88,18 +88,19 @@
             // BtnModificar
             // 
             BtnModificar.Anchor = AnchorStyles.Right;
-            BtnModificar.Location = new Point(451, 69);
+            BtnModificar.Location = new Point(478, 95);
             BtnModificar.Margin = new Padding(2);
             BtnModificar.Name = "BtnModificar";
             BtnModificar.Size = new Size(78, 25);
             BtnModificar.TabIndex = 2;
             BtnModificar.Text = "Modificar";
             BtnModificar.UseVisualStyleBackColor = true;
+            BtnModificar.Click += BtnModificar_Click;
             // 
             // BtnEliminar
             // 
             BtnEliminar.Anchor = AnchorStyles.Right;
-            BtnEliminar.Location = new Point(451, 111);
+            BtnEliminar.Location = new Point(478, 137);
             BtnEliminar.Margin = new Padding(2);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(78, 25);
@@ -111,7 +112,7 @@
             // BtnSalir
             // 
             BtnSalir.Anchor = AnchorStyles.Bottom;
-            BtnSalir.Location = new Point(497, 196);
+            BtnSalir.Location = new Point(520, 232);
             BtnSalir.Margin = new Padding(2);
             BtnSalir.Name = "BtnSalir";
             BtnSalir.Size = new Size(50, 20);
@@ -128,7 +129,7 @@
             TabGeneral.Margin = new Padding(2);
             TabGeneral.Name = "TabGeneral";
             TabGeneral.SelectedIndex = 0;
-            TabGeneral.Size = new Size(560, 234);
+            TabGeneral.Size = new Size(587, 287);
             TabGeneral.TabIndex = 5;
             TabGeneral.Tag = "TabControl";
             // 
@@ -143,7 +144,7 @@
             TabListaProductos.Margin = new Padding(2);
             TabListaProductos.Name = "TabListaProductos";
             TabListaProductos.Padding = new Padding(2);
-            TabListaProductos.Size = new Size(552, 206);
+            TabListaProductos.Size = new Size(579, 259);
             TabListaProductos.TabIndex = 0;
             TabListaProductos.Text = "Lista de Productos";
             TabListaProductos.UseVisualStyleBackColor = true;
@@ -165,7 +166,7 @@
             TabAgregarModificar.Margin = new Padding(2);
             TabAgregarModificar.Name = "TabAgregarModificar";
             TabAgregarModificar.Padding = new Padding(2);
-            TabAgregarModificar.Size = new Size(552, 206);
+            TabAgregarModificar.Size = new Size(579, 259);
             TabAgregarModificar.TabIndex = 1;
             TabAgregarModificar.Text = "Agregar/Modificar";
             // 
@@ -227,8 +228,8 @@
             // 
             // NumPrecio
             // 
-            NumPrecio.DecimalPlaces = 2;
             NumPrecio.Location = new Point(122, 130);
+            NumPrecio.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             NumPrecio.Name = "NumPrecio";
             NumPrecio.Size = new Size(120, 23);
             NumPrecio.TabIndex = 3;
@@ -236,6 +237,7 @@
             // NumStockActual
             // 
             NumStockActual.Location = new Point(361, 130);
+            NumStockActual.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             NumStockActual.Name = "NumStockActual";
             NumStockActual.Size = new Size(120, 23);
             NumStockActual.TabIndex = 2;
@@ -256,18 +258,19 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.SkyBlue;
             panel1.Location = new Point(1, 1);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(560, 31);
+            panel1.Size = new Size(588, 31);
             panel1.TabIndex = 6;
             // 
             // ListProductosView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(560, 270);
+            ClientSize = new Size(587, 323);
             Controls.Add(TabGeneral);
             Controls.Add(panel1);
             Margin = new Padding(2);

@@ -95,6 +95,7 @@ namespace ControlDeStock.Views
         {
             Producto productoAGuardar = new()
             {
+                _id = productoModificado._id,
                 nombre = TxtNombre.Text,
                 categoria = TxtCategoria.Text,
                 presio = (int)NumPrecio.Value,
@@ -112,7 +113,7 @@ namespace ControlDeStock.Views
             {
                 response = await productoService.AddAsync(productoAGuardar);
             }
-            if (response)
+            if (response) 
             {
                 MessageBox.Show("Producto guardado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await ObtenemosLosProductos(); // Llamamos al método para obtener los productos y mostrar la grilla actualizada.
@@ -129,6 +130,28 @@ namespace ControlDeStock.Views
         {
             TabGeneral.SelectTab("TabListaProductos");
             LimpiarCampos();
+        }
+
+        private void BtnModificar_Click(object sender, EventArgs e)
+        {
+            if (GridProductosList.RowCount > 0 && GridProductosList.SelectedRows.Count > 0)
+            {
+                //*--*-- Obtenemos el producto seleccionado de la grilla para modificarlo. --*--*/
+                productoModificado = (Producto)GridProductosList.SelectedRows[0].DataBoundItem;//
+                TxtNombre.Text = productoModificado.nombre;
+                TxtCategoria.Text = productoModificado.categoria;
+                NumPrecio.Value = productoModificado.presio;
+                NumStockActual.Value = productoModificado.stock_actual;
+                TabGeneral.SelectTab("TabAgregarModificar");
+
+            }
+            else
+            {
+                //*--*-- Si no se ha seleccionado ningún producto, mostramos un mensaje de error. --*--*/
+                MessageBox.Show("Por favor, seleccione un producto para modificar.", "No se ha seleccionado ningún producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
     }
 }

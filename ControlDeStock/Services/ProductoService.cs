@@ -50,10 +50,9 @@ namespace ControlDeStock.Services
                 }
             }
         }
-
-        // Método para crear un nuevo producto
         public async Task<bool> UpdateAsync(Producto nuevoProducto)
-        {
+        {   // Método para crear un nuevo producto
+
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.PostAsJsonAsync(url, nuevoProducto);
