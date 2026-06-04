@@ -18,20 +18,20 @@ namespace ControlDeStock.Views
         HttpClient clientHttp = new();
         string url = "https://basededatosprueba-43f2.restdb.io/rest/producto?apikey=0eb02941b4157bb3f6f863477b58795b87db6";
         ProductoService productoService = new();
-        List<Producto> productos = new();
+        List<Producto> productos;
         Producto productoModificado;
+
         public ListProductosView()
         {
             InitializeComponent();
-            ObtenemosLosProductos();
+            _ = ObtenemosLosProductos();
         }
 
         //--*-- Método para obtener los productos y mostrarlos en la grilla --*--//
         private async Task ObtenemosLosProductos()
         {
-            GridProductosList.DataSource = await productoService.GetAllAsync();
-
-
+            productos = await productoService.GetAllAsync() ?? new List<Producto>();
+            GridProductosList.DataSource = productos;
         }
 
         //--*-- Método para eliminar un producto seleccionado en la grilla --*--//
@@ -95,7 +95,7 @@ namespace ControlDeStock.Views
         {
             Producto productoAGuardar = new()
             {
-                _id = productoModificado._id,
+                _id = productoModificado?._id ?? null,
                 nombre = TxtNombre.Text,
                 categoria = TxtCategoria.Text,
                 presio = (int)NumPrecio.Value,
@@ -113,7 +113,7 @@ namespace ControlDeStock.Views
             {
                 response = await productoService.AddAsync(productoAGuardar);
             }
-            if (response) 
+            if (response)
             {
                 MessageBox.Show("Producto guardado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await ObtenemosLosProductos(); // Llamamos al método para obtener los productos y mostrar la grilla actualizada.
@@ -153,12 +153,43 @@ namespace ControlDeStock.Views
 
 
         }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            if (productos == null) return;
+
+            string filtro = TxtBuscar.Text.ToLowerInvariant();
+            var productosFiltrados = productos
+                .Where(p => (p.nombre ?? "").ToLowerInvariant().Contains(filtro) ||
+                            (p.categoria ?? "").ToLowerInvariant().Contains(filtro))
+                .ToList();
+            GridProductosList.DataSource = productosFiltrados;
+        }
+
+        private void TxtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            BtnBuscar.PerformClick(); // Simulamos un clic en el botón de búsqueda cada vez que el texto del campo de búsqueda cambie, para actualizar la grilla en tiempo real.
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close(); // Cerramos la ventana actual para salir de la aplicación.   
+        }
     }
 }
 
 
 
     
+
+
+
+
+
+
+
+
+
 
 
 

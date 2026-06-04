@@ -35,6 +35,8 @@
             BtnSalir = new Button();
             TabGeneral = new TabControl();
             TabListaProductos = new TabPage();
+            BtnBuscar = new Button();
+            TxtBuscar = new TextBox();
             TabAgregarModificar = new TabPage();
             BtnCancelar = new Button();
             BtnGuardar = new Button();
@@ -63,20 +65,20 @@
             GridProductosList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             GridProductosList.BackgroundColor = Color.Lavender;
             GridProductosList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            GridProductosList.Location = new Point(0, 2);
+            GridProductosList.Location = new Point(4, 34);
             GridProductosList.Margin = new Padding(2);
             GridProductosList.MultiSelect = false;
             GridProductosList.Name = "GridProductosList";
             GridProductosList.ReadOnly = true;
             GridProductosList.RowHeadersWidth = 62;
             GridProductosList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridProductosList.Size = new Size(458, 252);
+            GridProductosList.Size = new Size(458, 223);
             GridProductosList.TabIndex = 0;
             // 
             // BtnAgregar
             // 
             BtnAgregar.Anchor = AnchorStyles.Right;
-            BtnAgregar.Location = new Point(478, 53);
+            BtnAgregar.Location = new Point(478, 85);
             BtnAgregar.Margin = new Padding(2);
             BtnAgregar.Name = "BtnAgregar";
             BtnAgregar.Size = new Size(78, 25);
@@ -88,7 +90,7 @@
             // BtnModificar
             // 
             BtnModificar.Anchor = AnchorStyles.Right;
-            BtnModificar.Location = new Point(478, 95);
+            BtnModificar.Location = new Point(478, 127);
             BtnModificar.Margin = new Padding(2);
             BtnModificar.Name = "BtnModificar";
             BtnModificar.Size = new Size(78, 25);
@@ -100,7 +102,7 @@
             // BtnEliminar
             // 
             BtnEliminar.Anchor = AnchorStyles.Right;
-            BtnEliminar.Location = new Point(478, 137);
+            BtnEliminar.Location = new Point(478, 169);
             BtnEliminar.Margin = new Padding(2);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(78, 25);
@@ -119,6 +121,7 @@
             BtnSalir.TabIndex = 4;
             BtnSalir.Text = "Salir";
             BtnSalir.UseVisualStyleBackColor = true;
+            BtnSalir.Click += BtnSalir_Click;
             // 
             // TabGeneral
             // 
@@ -135,6 +138,8 @@
             // 
             // TabListaProductos
             // 
+            TabListaProductos.Controls.Add(BtnBuscar);
+            TabListaProductos.Controls.Add(TxtBuscar);
             TabListaProductos.Controls.Add(GridProductosList);
             TabListaProductos.Controls.Add(BtnSalir);
             TabListaProductos.Controls.Add(BtnAgregar);
@@ -148,6 +153,26 @@
             TabListaProductos.TabIndex = 0;
             TabListaProductos.Text = "Lista de Productos";
             TabListaProductos.UseVisualStyleBackColor = true;
+            // 
+            // BtnBuscar
+            // 
+            BtnBuscar.Anchor = AnchorStyles.Right;
+            BtnBuscar.Location = new Point(478, 5);
+            BtnBuscar.Margin = new Padding(2);
+            BtnBuscar.Name = "BtnBuscar";
+            BtnBuscar.Size = new Size(78, 25);
+            BtnBuscar.TabIndex = 8;
+            BtnBuscar.Text = "Buscar";
+            BtnBuscar.UseVisualStyleBackColor = true;
+            BtnBuscar.Click += BtnBuscar_Click;
+            // 
+            // TxtBuscar
+            // 
+            TxtBuscar.Location = new Point(6, 5);
+            TxtBuscar.Name = "TxtBuscar";
+            TxtBuscar.Size = new Size(452, 23);
+            TxtBuscar.TabIndex = 7;
+            TxtBuscar.TextChanged += TxtBuscar_TextChanged;
             // 
             // TabAgregarModificar
             // 
@@ -279,6 +304,7 @@
             ((System.ComponentModel.ISupportInitialize)GridProductosList).EndInit();
             TabGeneral.ResumeLayout(false);
             TabListaProductos.ResumeLayout(false);
+            TabListaProductos.PerformLayout();
             TabAgregarModificar.ResumeLayout(false);
             TabAgregarModificar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumPrecio).EndInit();
@@ -307,5 +333,7 @@
         private Label label1;
         private Button BtnCancelar;
         private Button BtnGuardar;
+        private TextBox TxtBuscar;
+        private Button BtnBuscar;
     }
 }
