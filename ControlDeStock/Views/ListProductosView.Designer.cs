@@ -49,6 +49,8 @@
             TxtCategoria = new TextBox();
             TxtNombre = new TextBox();
             panel1 = new Panel();
+            label5 = new Label();
+            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)GridProductosList).BeginInit();
             TabGeneral.SuspendLayout();
             TabListaProductos.SuspendLayout();
@@ -170,13 +172,15 @@
             // 
             TxtBuscar.Location = new Point(6, 5);
             TxtBuscar.Name = "TxtBuscar";
-            TxtBuscar.Size = new Size(452, 23);
+            TxtBuscar.Size = new Size(301, 23);
             TxtBuscar.TabIndex = 7;
             TxtBuscar.TextChanged += TxtBuscar_TextChanged;
             // 
             // TabAgregarModificar
             // 
             TabAgregarModificar.BackColor = Color.Lavender;
+            TabAgregarModificar.Controls.Add(comboBox1);
+            TabAgregarModificar.Controls.Add(label5);
             TabAgregarModificar.Controls.Add(BtnCancelar);
             TabAgregarModificar.Controls.Add(BtnGuardar);
             TabAgregarModificar.Controls.Add(label4);
@@ -197,7 +201,7 @@
             // 
             // BtnCancelar
             // 
-            BtnCancelar.Location = new Point(300, 178);
+            BtnCancelar.Location = new Point(303, 205);
             BtnCancelar.Name = "BtnCancelar";
             BtnCancelar.Size = new Size(70, 23);
             BtnCancelar.TabIndex = 9;
@@ -207,7 +211,7 @@
             // 
             // BtnGuardar
             // 
-            BtnGuardar.Location = new Point(172, 178);
+            BtnGuardar.Location = new Point(191, 205);
             BtnGuardar.Name = "BtnGuardar";
             BtnGuardar.Size = new Size(70, 23);
             BtnGuardar.TabIndex = 8;
@@ -218,7 +222,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(279, 132);
+            label4.Location = new Point(275, 164);
             label4.Name = "label4";
             label4.Size = new Size(76, 15);
             label4.TabIndex = 7;
@@ -227,7 +231,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(73, 132);
+            label3.Location = new Point(71, 164);
             label3.Name = "label3";
             label3.Size = new Size(43, 15);
             label3.TabIndex = 6;
@@ -236,7 +240,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(67, 65);
+            label2.Location = new Point(69, 65);
             label2.Name = "label2";
             label2.Size = new Size(61, 15);
             label2.TabIndex = 5;
@@ -245,7 +249,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(69, 32);
+            label1.Location = new Point(71, 27);
             label1.Name = "label1";
             label1.Size = new Size(54, 15);
             label1.TabIndex = 4;
@@ -253,7 +257,7 @@
             // 
             // NumPrecio
             // 
-            NumPrecio.Location = new Point(122, 130);
+            NumPrecio.Location = new Point(120, 162);
             NumPrecio.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             NumPrecio.Name = "NumPrecio";
             NumPrecio.Size = new Size(120, 23);
@@ -261,7 +265,7 @@
             // 
             // NumStockActual
             // 
-            NumStockActual.Location = new Point(361, 130);
+            NumStockActual.Location = new Point(361, 156);
             NumStockActual.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             NumStockActual.Name = "NumStockActual";
             NumStockActual.Size = new Size(120, 23);
@@ -290,6 +294,23 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(588, 31);
             panel1.TabIndex = 6;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(55, 103);
+            label5.Name = "label5";
+            label5.Size = new Size(75, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Movimiento:";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(131, 100);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(350, 23);
+            comboBox1.TabIndex = 11;
             // 
             // ListProductosView
             // 
@@ -335,5 +356,7 @@
         private Button BtnGuardar;
         private TextBox TxtBuscar;
         private Button BtnBuscar;
+        private Label label5;
+        private ComboBox comboBox1;
     }
 }
