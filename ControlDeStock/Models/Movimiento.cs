@@ -9,8 +9,13 @@ namespace ControlDeStock.Models
     public class Movimiento
     {
         public string? _id { get; set; }
-        public string? tipo_movimiento { get; set; } //Ingreso, Salida, Encargue o Devolucion
+
+        public Producto id_producto { get; set; }
+
+        public string? tipo_movimiento { get; set; }
+
         public int cantidad { get; set; }
+
         public DateTime fecha { get; set; }
     }
 }

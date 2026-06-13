@@ -1,6 +1,6 @@
 ﻿namespace ControlDeStock.Views
 {
-    partial class ListProductosView
+    partial class ListaMovimientosView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,54 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            GridProductosList = new DataGridView();
+            GridMovimientosLista = new DataGridView();
             BtnAgregar = new Button();
             BtnModificar = new Button();
             BtnEliminar = new Button();
             BtnSalir = new Button();
             TabGeneral = new TabControl();
-            TabListaProductos = new TabPage();
+            TabListaMovimientos = new TabPage();
             BtnBuscar = new Button();
             TxtBuscar = new TextBox();
             TabAgregarModificar = new TabPage();
+            FechaMovimiento = new DateTimePicker();
+            CbProductos = new ComboBox();
             CbMovimientos = new ComboBox();
             label5 = new Label();
             BtnCancelar = new Button();
             BtnGuardar = new Button();
             label4 = new Label();
             label3 = new Label();
-            label2 = new Label();
             label1 = new Label();
-            NumPrecio = new NumericUpDown();
-            NumStockActual = new NumericUpDown();
-            TxtCategoria = new TextBox();
-            TxtNombre = new TextBox();
+            NumCantidad = new NumericUpDown();
             panel1 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)GridProductosList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GridMovimientosLista).BeginInit();
             TabGeneral.SuspendLayout();
-            TabListaProductos.SuspendLayout();
+            TabListaMovimientos.SuspendLayout();
             TabAgregarModificar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)NumPrecio).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)NumStockActual).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumCantidad).BeginInit();
             SuspendLayout();
             // 
-            // GridProductosList
+            // GridMovimientosLista
             // 
-            GridProductosList.AllowUserToAddRows = false;
-            GridProductosList.AllowUserToDeleteRows = false;
-            GridProductosList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            GridProductosList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            GridProductosList.BackgroundColor = Color.Lavender;
-            GridProductosList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            GridProductosList.Location = new Point(4, 34);
-            GridProductosList.Margin = new Padding(2);
-            GridProductosList.MultiSelect = false;
-            GridProductosList.Name = "GridProductosList";
-            GridProductosList.ReadOnly = true;
-            GridProductosList.RowHeadersWidth = 62;
-            GridProductosList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridProductosList.Size = new Size(458, 223);
-            GridProductosList.TabIndex = 0;
+            GridMovimientosLista.AllowUserToAddRows = false;
+            GridMovimientosLista.AllowUserToDeleteRows = false;
+            GridMovimientosLista.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            GridMovimientosLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            GridMovimientosLista.BackgroundColor = Color.Lavender;
+            GridMovimientosLista.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GridMovimientosLista.Location = new Point(4, 34);
+            GridMovimientosLista.Margin = new Padding(2);
+            GridMovimientosLista.MultiSelect = false;
+            GridMovimientosLista.Name = "GridMovimientosLista";
+            GridMovimientosLista.ReadOnly = true;
+            GridMovimientosLista.RowHeadersWidth = 62;
+            GridMovimientosLista.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            GridMovimientosLista.Size = new Size(456, 223);
+            GridMovimientosLista.TabIndex = 0;
             // 
             // BtnAgregar
             // 
@@ -128,7 +125,7 @@
             // TabGeneral
             // 
             TabGeneral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            TabGeneral.Controls.Add(TabListaProductos);
+            TabGeneral.Controls.Add(TabListaMovimientos);
             TabGeneral.Controls.Add(TabAgregarModificar);
             TabGeneral.Location = new Point(2, 36);
             TabGeneral.Margin = new Padding(2);
@@ -138,23 +135,23 @@
             TabGeneral.TabIndex = 5;
             TabGeneral.Tag = "TabControl";
             // 
-            // TabListaProductos
+            // TabListaMovimientos
             // 
-            TabListaProductos.Controls.Add(BtnBuscar);
-            TabListaProductos.Controls.Add(TxtBuscar);
-            TabListaProductos.Controls.Add(GridProductosList);
-            TabListaProductos.Controls.Add(BtnSalir);
-            TabListaProductos.Controls.Add(BtnAgregar);
-            TabListaProductos.Controls.Add(BtnEliminar);
-            TabListaProductos.Controls.Add(BtnModificar);
-            TabListaProductos.Location = new Point(4, 24);
-            TabListaProductos.Margin = new Padding(2);
-            TabListaProductos.Name = "TabListaProductos";
-            TabListaProductos.Padding = new Padding(2);
-            TabListaProductos.Size = new Size(579, 259);
-            TabListaProductos.TabIndex = 0;
-            TabListaProductos.Text = "Lista de Productos";
-            TabListaProductos.UseVisualStyleBackColor = true;
+            TabListaMovimientos.Controls.Add(BtnBuscar);
+            TabListaMovimientos.Controls.Add(TxtBuscar);
+            TabListaMovimientos.Controls.Add(GridMovimientosLista);
+            TabListaMovimientos.Controls.Add(BtnSalir);
+            TabListaMovimientos.Controls.Add(BtnAgregar);
+            TabListaMovimientos.Controls.Add(BtnEliminar);
+            TabListaMovimientos.Controls.Add(BtnModificar);
+            TabListaMovimientos.Location = new Point(4, 24);
+            TabListaMovimientos.Margin = new Padding(2);
+            TabListaMovimientos.Name = "TabListaMovimientos";
+            TabListaMovimientos.Padding = new Padding(2);
+            TabListaMovimientos.Size = new Size(579, 259);
+            TabListaMovimientos.TabIndex = 0;
+            TabListaMovimientos.Text = "Lista de Movimientos";
+            TabListaMovimientos.UseVisualStyleBackColor = true;
             // 
             // BtnBuscar
             // 
@@ -179,18 +176,16 @@
             // TabAgregarModificar
             // 
             TabAgregarModificar.BackColor = Color.Lavender;
+            TabAgregarModificar.Controls.Add(FechaMovimiento);
+            TabAgregarModificar.Controls.Add(CbProductos);
             TabAgregarModificar.Controls.Add(CbMovimientos);
             TabAgregarModificar.Controls.Add(label5);
             TabAgregarModificar.Controls.Add(BtnCancelar);
             TabAgregarModificar.Controls.Add(BtnGuardar);
             TabAgregarModificar.Controls.Add(label4);
             TabAgregarModificar.Controls.Add(label3);
-            TabAgregarModificar.Controls.Add(label2);
             TabAgregarModificar.Controls.Add(label1);
-            TabAgregarModificar.Controls.Add(NumPrecio);
-            TabAgregarModificar.Controls.Add(NumStockActual);
-            TabAgregarModificar.Controls.Add(TxtCategoria);
-            TabAgregarModificar.Controls.Add(TxtNombre);
+            TabAgregarModificar.Controls.Add(NumCantidad);
             TabAgregarModificar.Location = new Point(4, 24);
             TabAgregarModificar.Margin = new Padding(2);
             TabAgregarModificar.Name = "TabAgregarModificar";
@@ -199,10 +194,25 @@
             TabAgregarModificar.TabIndex = 1;
             TabAgregarModificar.Text = "Agregar/Modificar";
             // 
+            // FechaMovimiento
+            // 
+            FechaMovimiento.Location = new Point(131, 155);
+            FechaMovimiento.Name = "FechaMovimiento";
+            FechaMovimiento.Size = new Size(200, 23);
+            FechaMovimiento.TabIndex = 13;
+            // 
+            // CbProductos
+            // 
+            CbProductos.FormattingEnabled = true;
+            CbProductos.Location = new Point(131, 19);
+            CbProductos.Name = "CbProductos";
+            CbProductos.Size = new Size(350, 23);
+            CbProductos.TabIndex = 12;
+            // 
             // CbMovimientos
             // 
             CbMovimientos.FormattingEnabled = true;
-            CbMovimientos.Location = new Point(131, 100);
+            CbMovimientos.Location = new Point(131, 60);
             CbMovimientos.Name = "CbMovimientos";
             CbMovimientos.Size = new Size(350, 23);
             CbMovimientos.TabIndex = 11;
@@ -210,7 +220,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(55, 103);
+            label5.Location = new Point(55, 60);
             label5.Name = "label5";
             label5.Size = new Size(75, 15);
             label5.TabIndex = 10;
@@ -239,68 +249,37 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(275, 164);
+            label4.Location = new Point(71, 163);
             label4.Name = "label4";
-            label4.Size = new Size(76, 15);
+            label4.Size = new Size(41, 15);
             label4.TabIndex = 7;
-            label4.Text = "Stock Actual:";
+            label4.Text = "Fecha:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(71, 164);
+            label3.Location = new Point(71, 104);
             label3.Name = "label3";
-            label3.Size = new Size(43, 15);
+            label3.Size = new Size(58, 15);
             label3.TabIndex = 6;
-            label3.Text = "Precio:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(69, 65);
-            label2.Name = "label2";
-            label2.Size = new Size(61, 15);
-            label2.TabIndex = 5;
-            label2.Text = "Categoria:";
+            label3.Text = "Cantidad:";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(71, 27);
             label1.Name = "label1";
-            label1.Size = new Size(54, 15);
+            label1.Size = new Size(59, 15);
             label1.TabIndex = 4;
-            label1.Text = "Nombre:";
+            label1.Text = "Producto:";
             // 
-            // NumPrecio
+            // NumCantidad
             // 
-            NumPrecio.Location = new Point(120, 162);
-            NumPrecio.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
-            NumPrecio.Name = "NumPrecio";
-            NumPrecio.Size = new Size(120, 23);
-            NumPrecio.TabIndex = 3;
-            // 
-            // NumStockActual
-            // 
-            NumStockActual.Location = new Point(361, 156);
-            NumStockActual.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
-            NumStockActual.Name = "NumStockActual";
-            NumStockActual.Size = new Size(120, 23);
-            NumStockActual.TabIndex = 2;
-            // 
-            // TxtCategoria
-            // 
-            TxtCategoria.Location = new Point(131, 62);
-            TxtCategoria.Name = "TxtCategoria";
-            TxtCategoria.Size = new Size(350, 23);
-            TxtCategoria.TabIndex = 1;
-            // 
-            // TxtNombre
-            // 
-            TxtNombre.Location = new Point(131, 24);
-            TxtNombre.Name = "TxtNombre";
-            TxtNombre.Size = new Size(350, 23);
-            TxtNombre.TabIndex = 0;
+            NumCantidad.Location = new Point(131, 102);
+            NumCantidad.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            NumCantidad.Name = "NumCantidad";
+            NumCantidad.Size = new Size(120, 23);
+            NumCantidad.TabIndex = 3;
             // 
             // panel1
             // 
@@ -312,7 +291,7 @@
             panel1.Size = new Size(588, 31);
             panel1.TabIndex = 6;
             // 
-            // ListProductosView
+            // ListaMovimientosView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -320,37 +299,32 @@
             Controls.Add(TabGeneral);
             Controls.Add(panel1);
             Margin = new Padding(2);
-            Name = "ListProductosView";
+            Name = "ListaMovimientosView";
             Text = "ListProductosView";
-            ((System.ComponentModel.ISupportInitialize)GridProductosList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GridMovimientosLista).EndInit();
             TabGeneral.ResumeLayout(false);
-            TabListaProductos.ResumeLayout(false);
-            TabListaProductos.PerformLayout();
+            TabListaMovimientos.ResumeLayout(false);
+            TabListaMovimientos.PerformLayout();
             TabAgregarModificar.ResumeLayout(false);
             TabAgregarModificar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)NumPrecio).EndInit();
-            ((System.ComponentModel.ISupportInitialize)NumStockActual).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumCantidad).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView GridProductosList;
+        private DataGridView GridMovimientosLista;
         private Button BtnAgregar;
         private Button BtnModificar;
         private Button BtnEliminar;
         private Button BtnSalir;
         private TabControl TabGeneral;
-        private TabPage TabListaProductos;
+        private TabPage TabListaMovimientos;
         private TabPage TabAgregarModificar;
         private Panel panel1;
-        private NumericUpDown NumStockActual;
-        private TextBox TxtCategoria;
-        private TextBox TxtNombre;
-        private NumericUpDown NumPrecio;
+        private NumericUpDown NumCantidad;
         private Label label4;
         private Label label3;
-        private Label label2;
         private Label label1;
         private Button BtnCancelar;
         private Button BtnGuardar;
@@ -358,5 +332,7 @@
         private Button BtnBuscar;
         private Label label5;
         private ComboBox CbMovimientos;
+        private ComboBox CbProductos;
+        private DateTimePicker FechaMovimiento;
     }
 }

@@ -11,7 +11,7 @@ namespace ControlDeStock.Models
         public string? _id { get; set; }
         public string nombre { get; set; }
         public string categoria { get; set; }
-        public int presio { get; set; }
+        public decimal presio { get; set; }
         public int stock_actual { get; set; }
     }
 }

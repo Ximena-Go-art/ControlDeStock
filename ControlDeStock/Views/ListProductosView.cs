@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,17 @@ namespace ControlDeStock.Views
         List<Producto> productos;
         Producto productoModificado;
 
+        MovimientoService movimientoService = new();
+            List<Movimiento> movimientos;
+            Movimiento movimientoSeleccionado;
+
         public ListProductosView()
         {
             InitializeComponent();
             _ = ObtenemosLosProductos();
         }
+
+        
 
         //--*-- Método para obtener los productos y mostrarlos en la grilla --*--//
         private async Task ObtenemosLosProductos()
@@ -175,12 +182,26 @@ namespace ControlDeStock.Views
         {
             this.Close(); // Cerramos la ventana actual para salir de la aplicación.   
         }
-    }
+
+        //---- Método para cargar los tipos en el ComboBox ----//
+ }
 }
 
 
 
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
