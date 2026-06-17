@@ -10,7 +10,7 @@ namespace ControlDeStock.Models
     {
         public string? _id { get; set; }
 
-        public Producto id_producto { get; set; }
+        public string? producto { get; set; }
 
         public string? tipo_movimiento { get; set; }
 

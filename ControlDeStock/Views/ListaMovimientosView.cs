@@ -25,28 +25,42 @@ namespace ControlDeStock.Views
 
         ProductoService productoService = new();
         List<Producto> productos = new();
-        Producto? productoModificado;
+
 
         public ListaMovimientosView()
         {
             InitializeComponent();
-            ObtenemosLosMovimientos();
-            //CargarLosProductos();
+            _ = ObtenemosLosMovimientos();
+            _ = CargarLosProductos();
+        }
+
+        private async Task CargarLosProductos()
+        {
+            productos = await productoService.GetAllAsync() ?? new List<Producto>();
+
+            CbProductos.DataSource = productos;
+            CbProductos.DisplayMember = "nombre";
+            CbProductos.ValueMember = "_id";
         }
 
         //--*-- Método para obtener los productos y mostrarlos en la grilla --*--//
         private async Task ObtenemosLosMovimientos()
         {
-            movimiento = await movimientoService.GetAllAsync() ?? new List<Movimiento>();
-            GridMovimientosLista.DataSource = movimiento;
+
+           movimiento = await movimientoService.GetAllAsync()
+                             ?? new List<Movimiento>();
+           GridMovimientosLista.DataSource = movimiento;
+
+            CbMovimientos.Items.Add("Entrada");
+            CbMovimientos.Items.Add("Salida");
+            CbMovimientos.Items.Add("Devolucion");
+            CbMovimientos.Items.Add("Encargue");
+
         }
-
-
 
         //--*-- Método para eliminar un producto seleccionado en la grilla --*--//
         private async void BtnEliminar_Click(object sender, EventArgs e)
         {
-            //--*-- Controlamos que haya productos en la grilla y que se haya seleccionado al menos una fila antes de intentar eliminar. --*--//
             if (GridMovimientosLista.RowCount > 0 &&
         GridMovimientosLista.SelectedRows.Count > 0)
             {
@@ -55,39 +69,24 @@ namespace ControlDeStock.Views
 
                 if (movimientoSeleccionado._id is null)
                 {
-                    MessageBox.Show(
-                        "El movimiento no tiene un identificador válido.",
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    MessageBox.Show("El movimiento no tiene un ID válido");
                     return;
                 }
 
                 var respuesta = MessageBox.Show(
                     "¿Desea eliminar este movimiento?",
-                    "Confirmar",
+                    "Confirmar eliminación",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
                 if (respuesta == DialogResult.Yes)
                 {
-                    if (await movimientoService.DeleteAsync(movimientoSeleccionado._id))
+                    if (await movimientoService.DeleteAsync(
+                        movimientoSeleccionado._id))
                     {
-                        MessageBox.Show(
-                            "Movimiento eliminado correctamente.",
-                            "Éxito",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        MessageBox.Show("Movimiento eliminado correctamente");
 
                         await ObtenemosLosMovimientos();
-                    }
-                    else
-                    {
-                        MessageBox.Show(
-                            "Error al eliminar el movimiento.",
-                            "Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
                     }
                 }
             }
@@ -98,7 +97,7 @@ namespace ControlDeStock.Views
         {
 
             TabGeneral.SelectTab("TabAgregarModificar");
-            productoModificado = null; // Reiniciamos la variable para indicar que no estamos modificando ningún producto.
+            movimientoModificado = null;
         }
 
         private void LimpiarCampos()
@@ -112,61 +111,69 @@ namespace ControlDeStock.Views
 
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
-            if (CbProductos.SelectedItem is not Producto productoSeleccionado)
+            if (CbProductos.SelectedValue == null)
             {
-                MessageBox.Show("Por favor, seleccione un producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Seleccione un producto");
                 return;
             }
 
             Movimiento movimientoAGuardar = new()
             {
                 _id = movimientoModificado?._id,
-                id_producto = productoSeleccionado,
+
+                producto = CbProductos.SelectedValue?.ToString(),
+
                 tipo_movimiento = CbMovimientos.Text,
+
                 cantidad = (int)NumCantidad.Value,
+
                 fecha = FechaMovimiento.Value
             };
 
-            switch (CbMovimientos.Text)
-            {
-                case "Entrada":
-                    productoSeleccionado.stock_actual += movimientoAGuardar.cantidad;
-                    break;
+            Producto productoSeleccionado =
+                productos.FirstOrDefault(
+                    p => p._id == movimientoAGuardar.producto);
 
-                case "Salida":
+            if (productoSeleccionado != null)
+            {
+                if (movimientoAGuardar.tipo_movimiento == "Entrada")
+                {
+                    productoSeleccionado.stock_actual += movimientoAGuardar.cantidad;
+                }
+                else if (movimientoAGuardar.tipo_movimiento == "Salida")
+                {
                     if (productoSeleccionado.stock_actual < movimientoAGuardar.cantidad)
                     {
-                        MessageBox.Show("No hay stock suficiente para realizar la salida.", "Stock insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Stock insuficiente");
                         return;
                     }
+
                     productoSeleccionado.stock_actual -= movimientoAGuardar.cantidad;
-                    break;
+                }
+
+                await productoService.UpdateAsync(productoSeleccionado);
             }
 
-            await productoService.UpdateAsync(productoSeleccionado);
-
-
-            bool response;// Variable para almacenar la respuesta de la operación de guardado (agregar o modificar).
+            bool response;
 
             if (movimientoModificado != null)
             {
                 response = await movimientoService.UpdateAsync(movimientoAGuardar);
-
             }
             else
             {
                 response = await movimientoService.AddAsync(movimientoAGuardar);
             }
+
             if (response)
             {
-                MessageBox.Show("Movimiento guardado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await ObtenemosLosMovimientos(); // Llamamos al método para obtener los productos y mostrar la grilla actualizada.
+                MessageBox.Show("Movimiento guardado correctamente");
+
+                await ObtenemosLosMovimientos();
+
                 LimpiarCampos();
-                TabGeneral.SelectTab("TabListaMovimientos"); // Volvemos a la pestaña de lista de productos después de guardar.
-            }
-            else
-            {
-                MessageBox.Show("Error al agregar el movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                TabGeneral.SelectTab("TabListaMovimientos");
             }
         }
 
@@ -179,25 +186,29 @@ namespace ControlDeStock.Views
         private void BtnModificar_Click(object sender, EventArgs e)
         {
             if (GridMovimientosLista.RowCount > 0 &&
-         GridMovimientosLista.SelectedRows.Count > 0)
+        GridMovimientosLista.SelectedRows.Count > 0)
             {
                 movimientoModificado =
                     (Movimiento)GridMovimientosLista.SelectedRows[0].DataBoundItem;
 
-                CbProductos.SelectedValue = movimientoModificado.id_producto;
-                CbMovimientos.Text = movimientoModificado.tipo_movimiento;
-                NumCantidad.Value = movimientoModificado.cantidad;
-                FechaMovimiento.Value = movimientoModificado.fecha;
+                CbProductos.SelectedValue =
+                    movimientoModificado.producto;
+
+                CbMovimientos.Text =
+                    movimientoModificado.tipo_movimiento;
+
+                NumCantidad.Value =
+                    movimientoModificado.cantidad;
+
+                FechaMovimiento.Value =
+                    movimientoModificado.fecha;
 
                 TabGeneral.SelectTab("TabAgregarModificar");
             }
             else
             {
                 MessageBox.Show(
-                    "Seleccione un movimiento para modificar.",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    "Seleccione un movimiento para modificar.");
             }
         }
 
@@ -205,12 +216,12 @@ namespace ControlDeStock.Views
         {
             if (movimiento == null) return;
 
-            string filtro = TxtBuscar.Text.ToLower();
+            string filtro = TxtBuscar.Text.ToLowerInvariant();
 
             var movimientosFiltrados = movimiento
                 .Where(m =>
                     (m.tipo_movimiento ?? "")
-                    .ToLower()
+                    .ToLowerInvariant()
                     .Contains(filtro))
                 .ToList();
 
@@ -225,45 +236,6 @@ namespace ControlDeStock.Views
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             this.Close(); // Cerramos la ventana actual para salir de la aplicación.   
-        }
-
-        //---- Método para cargar los tipos en el ComboBox ----//
-        private void CargarTiposDeMovimiento()
-        {
-            // 1. Creamos la lista con los tipos de movimientos fijos.
-            /*List<Movimiento> listaMovimientos = new List<Movimiento>()
-                {
-                        new Movimiento { _id = 1, tipo_movimiento = "Entrada" },
-                        new Movimiento { _id = 2, tipo_movimiento = "Salida" },
-                        new Movimiento { _id = 3, tipo_movimiento = "Ajuste de Stock" }
-                };
-
-            // 2. Asignamos la lista al ComboBox "CbMovimientos".
-            CbMovimientos.DataSource = null;
-            CbMovimientos.DataSource = listaMovimientos;
-
-            // 3. Configuramos qué se muestra y qué es el valor interno.
-            CbMovimientos.DisplayMember = "tipo_movimiento";
-            CbMovimientos.ValueMember = "_id";
-
-            // 4. Opcional: Dejamos el ComboBox sin selección inicial.
-            CbMovimientos.SelectedIndex = -1;
-        }
-
-            //---- Evento para manejar el cambio de selección en el ComboBox ----//
-                private void CbMovimientos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Validamos que exista una selección para evitar errores.
-            if (CbMovimientos.SelectedIndex == -1) return;
-
-            // Obtenemos el objeto completo seleccionado.
-            if (CbMovimientos.SelectedItem is Movimiento movimientoSeleccionado)
-            {
-                int idSeleccionado = movimientoSeleccionado._id;
-                string nombreSeleccionado = movimientoSeleccionado.tipo_movimiento;
-
-                // TODO: Aquí puedes utilizar los valores obtenidos (idSeleccionado y nombreSeleccionado)
-                // para la lógica que necesites, como ajustar el stock o mostrar/ocultar controles.*/
         }
 
     }

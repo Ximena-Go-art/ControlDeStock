@@ -22,10 +22,6 @@ namespace ControlDeStock.Views
         List<Producto> productos;
         Producto productoModificado;
 
-        MovimientoService movimientoService = new();
-            List<Movimiento> movimientos;
-            Movimiento movimientoSeleccionado;
-
         public ListProductosView()
         {
             InitializeComponent();
